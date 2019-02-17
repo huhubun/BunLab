@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -33,8 +33,7 @@ const config = {
                 NODE_ENV: isDev ? '"development"' : '"production"'
             }
         }),
-        new VueLoaderPlugin(),
-        new HtmlWebpackPlugin()
+        new VueLoaderPlugin()
     ]
 }
 
@@ -66,7 +65,13 @@ if (isDev) {
             },
             'stylus-loader'
         ]
-    });
+    })
+
+    config.plugins.push(new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'assets/index.dev.html',
+        inject: true
+    }))
 
     config.devtool = '#cheap-module-eval-source-map'
 
@@ -144,6 +149,16 @@ else {
             }
         },
         runtimeChunk: true
+    }
+
+    config.plugins.push(new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'assets/index.prod.html',
+        inject: true
+    }))
+    
+    config.externals = {
+        'vue': 'Vue'
     }
 }
 

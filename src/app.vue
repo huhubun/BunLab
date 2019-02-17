@@ -1,5 +1,7 @@
 <template>
-  <div id="url">{{ text }}</div>
+  <div id="app">
+    <div id="url">{{ text }}</div>
+  </div>
 </template>
 
 <script>
