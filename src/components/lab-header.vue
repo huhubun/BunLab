@@ -40,6 +40,7 @@ header .pure-menu-heading
 
 header .pure-menu-link
   color: rgb(97, 97, 97)
+  background-color: transparent
 
 header .pure-menu-link:hover
   background-color: transparent
