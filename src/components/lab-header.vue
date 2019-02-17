@@ -1,9 +1,10 @@
 <template>
   <header>
     <div class="pure-menu pure-menu-horizontal">
-      <a href="/" class="pure-menu-link pure-menu-heading">Bun Web Lab
+      <router-link to="/" class="pure-menu-link pure-menu-heading">
+        Bun Web Lab
         <small>beta</small>
-      </a>
+      </router-link>
     </div>
   </header>
 </template>
