@@ -1,17 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './app.vue'
-import Index from './index/index.vue'
-import UAViewer from './ua/ua-viewer.vue'
+import routers from './router/router' 
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
     mode: 'history',
-    routes: [
-        { path: '/', component: Index },
-        { path: '/ua', component: UAViewer }
-    ]
+    routes: routers.routes
 })
 
 new Vue({

@@ -5,13 +5,27 @@
         Bun Web Lab
         <small>beta</small>
       </router-link>
+      <div class="pure-menu-heading project-name" v-if="projectName">{{projectName}}</div>
     </div>
   </header>
 </template>
 
 <script>
-export default {
+import routers from '../router/router'
 
+export default {
+  computed: {
+    projectName() {
+      let path = this.$route.path
+      var route = routers.routes.find(r => r.path === path)
+
+      if(route){
+        return route.title
+      }
+
+      return null
+    }
+  }
 }
 </script>
 
