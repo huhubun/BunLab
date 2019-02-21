@@ -1,5 +1,5 @@
 <template>
-  <div class="pure-u-1-4">
+  <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3 pure-u-xl-1-4">
     <div :class="['project', project.status === 'coming-soon' ? 'coming-soon' : '' ]">
       <h3 class="name">
         <router-link :to="project.router" v-if="project.router">{{project.name}}</router-link>
