@@ -1,2 +1,2 @@
 # BunLab
-lab.nzc.me
+https://lab.bun.dev
