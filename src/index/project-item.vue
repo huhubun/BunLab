@@ -34,6 +34,8 @@ section.main .project .name
 section.main .project .name a
   color: rgb(90, 90, 90)
   text-decoration: underline dashed
+  text-decoration-skip-ink: none
+  
 
 section.main .project .description
   margin: 0.5em
