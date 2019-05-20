@@ -33,6 +33,12 @@ export default {
           status: projectStatus.online
         },
         {
+          name: 'GUID Gen',
+          description: 'GUID 生成器',
+          router: '/guidgen',
+          status: projectStatus.comingSoon
+        },
+        {
           name: 'Coming Soon',
           description: '敬请期待',
           router: '',

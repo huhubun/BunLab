@@ -41,4 +41,7 @@ section.main .project .description
 section.main .project.coming-soon
   color: rgb(200, 196, 186)
   border: 1px solid rgb(200, 196, 186)
+
+section.main .project.coming-soon a
+  color: rgb(200, 196, 186)
 </style>
