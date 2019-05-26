@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-axios.defaults.baseURL  = 'http://localhost:5000/v1'
+axios.defaults.baseURL = `${window.bunLabConfig.api.url}/${window.bunLabConfig.api.version}`
 
 export default axios

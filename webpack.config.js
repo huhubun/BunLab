@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CopyPlugin = require('copy-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -72,6 +73,13 @@ if (isDev) {
         template: 'assets/index.dev.html',
         inject: true
     }))
+
+    config.plugins.push(new CopyPlugin([
+        {
+            from: 'config/config.dev.js',
+            to: 'config/config.dev.js'
+        }
+    ]))
 
     config.devtool = '#cheap-module-eval-source-map'
 
@@ -156,7 +164,14 @@ else {
         template: 'assets/index.prod.html',
         inject: true
     }))
-    
+
+    config.plugins.push(new CopyPlugin([
+        {
+            from: 'config/config.prod.js',
+            to: 'config/config.prod.js'
+        }
+    ]))
+
     config.externals = {
         'vue': 'Vue'
     }

@@ -20,6 +20,7 @@
         "@babel/preset-env": "^7.3.1",
         "autoprefixer": "^9.4.7",
         "babel-loader": "^8.0.5",
+        "copy-webpack-plugin": "^5.0.3",
         "cross-env": "^5.2.0",
         "css-loader": "^2.1.0",
         "file-loader": "^3.0.1",
