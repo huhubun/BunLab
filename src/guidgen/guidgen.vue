@@ -7,19 +7,35 @@
     <div class="pure-u-1-1">
       <button class="pure-button bun-button" @click="newGuid">生成一个 GUID</button>
     </div>
+
+    <div class="pure-u-1-1 pure-u-sm-1-1 pure-u-md-3-5 pure-u-lg-1-2 guid-history">
+      <ul v-for="item in guidHistory" v-bind:key="item.guid">
+        <li>
+          <small>[{{ item.datetime.getHours() }}:{{ item.datetime.getMinutes() }}:{{ item.datetime.getSeconds() }}]</small>
+          <span>{{ item.guid }}</span>
+        </li>
+      </ul>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
-    data(){
-
-    },
-    methods: {
-        newGuid(){
-            alert('等开发完成后，这里应该 duang 的一下，出来一个 GUID')
-        }
+  data() {
+    return {
+      guidHistory: []
     }
+  },
+  methods: {
+    newGuid() {
+      this.$api.id.newGuid().then(r => {
+        this.guidHistory.unshift({
+          guid: r.data.guid,
+          datetime: new Date()
+        })
+      })
+    }
+  }
 }
 </script>
 
@@ -35,4 +51,12 @@ export default {
 
 .bun-button:focus
   background-image: none
+
+.guid-history
+  margin-top: 1em
+  background-color: #eee8d5
+
+.guid-history ul
+  list-style-type: none
+  padding-left: 1em
 </style>
