@@ -11,7 +11,7 @@
     <div class="pure-u-1-1 pure-u-sm-1-1 pure-u-md-3-5 pure-u-lg-1-2 guid-history">
       <ul v-for="item in guidHistory" v-bind:key="item.guid">
         <li>
-          <small>[{{ item.datetime.getHours() }}:{{ item.datetime.getMinutes() }}:{{ item.datetime.getSeconds() }}]</small>
+          <small>[{{ dayjs(item.datetime).format('YYYY-MM-DD HH:mm:ss') }}]</small>
           <span>{{ item.guid }}</span>
         </li>
       </ul>
@@ -23,7 +23,8 @@
 export default {
   data() {
     return {
-      guidHistory: []
+      guidHistory: [],
+      dayjs: dayjs
     }
   },
   methods: {
