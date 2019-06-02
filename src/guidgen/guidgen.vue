@@ -11,8 +11,8 @@
     <div class="pure-u-1-1 pure-u-sm-1-1 pure-u-md-3-5 pure-u-lg-1-2 guid-history">
       <ul v-for="item in guidHistory" v-bind:key="item.guid">
         <li>
-          <small>[{{ dayjs(item.datetime).format('YYYY-MM-DD HH:mm:ss') }}]</small>
-          <span>{{ item.guid }}</span>
+          <span class="datetime">[{{ dayjs(item.datetime).format('YYYY-MM-DD HH:mm:ss') }}]</span>
+          <span class="guid">{{ item.guid }}</span>
         </li>
       </ul>
     </div>
@@ -60,4 +60,13 @@ export default {
 .guid-history ul
   list-style-type: none
   padding-left: 1em
+
+.guid-history li .datetime
+  font-family: 'Roboto Mono', monospace
+  font-weight: 300
+  font-size: 0.7em
+
+.guid-history li .guid
+  font-family: 'Roboto Mono', monospace
+  font-weight: 400
 </style>
