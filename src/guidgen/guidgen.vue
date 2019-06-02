@@ -5,14 +5,17 @@
     </div>
 
     <div class="pure-u-1-1">
-      <button class="pure-button bun-button" @click="newGuid">生成一个 GUID</button>
+      <button class="pure-button bun-button" @click="newGuid">
+        生成一个 GUID
+        <small>（点击 GUID 可以复制）</small>
+      </button>
     </div>
 
     <div class="pure-u-1-1 pure-u-sm-1-1 pure-u-md-3-5 pure-u-lg-1-2 guid-history">
       <ul v-for="item in guidHistory" v-bind:key="item.guid">
         <li>
           <span class="datetime">[{{ dayjs(item.datetime).format('YYYY-MM-DD HH:mm:ss') }}]</span>
-          <span class="guid">{{ item.guid }}</span>
+          <span class="guid" v-bind:data-clipboard-text="item.guid">{{ item.guid }}</span>
         </li>
       </ul>
     </div>
@@ -20,6 +23,8 @@
 </template>
 
 <script>
+import ClipboardJS from 'clipboard'
+
 export default {
   data() {
     return {
@@ -36,6 +41,9 @@ export default {
         })
       })
     }
+  },
+  mounted() {
+    var clipboard = new ClipboardJS('.guid')
   }
 }
 </script>
@@ -69,4 +77,9 @@ export default {
 .guid-history li .guid
   font-family: 'Roboto Mono', monospace
   font-weight: 400
+  padding: 0 0.5em
+
+.guid-history li .guid:hover
+  background-color: rgb(217, 210, 194)
+  cursor: pointer
 </style>

@@ -12,6 +12,7 @@
     "license": "MIT",
     "dependencies": {
         "axios": "^0.18.0",
+        "clipboard": "^2.0.4",
         "dayjs": "^1.8.14",
         "vue": "^2.6.6",
         "vue-router": "^3.0.2"
