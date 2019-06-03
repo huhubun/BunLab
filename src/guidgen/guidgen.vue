@@ -5,7 +5,9 @@
     </div>
 
     <div class="pure-u-1-1">
-      <button class="pure-button bun-button" @click="newGuid">
+      <button class="pure-button bun-button" @click="newGuid" v-bind:disabled="isWaitingGuidResponse">
+        <v-icon name="circle-notch" spin v-show="isWaitingGuidResponse" />
+        <v-icon name="regular/circle" v-show="!isWaitingGuidResponse" />
         生成一个 GUID
         <small>（点击 GUID 可以复制）</small>
       </button>
@@ -28,17 +30,22 @@ import ClipboardJS from 'clipboard'
 export default {
   data() {
     return {
+      dayjs: dayjs,
       guidHistory: [],
-      dayjs: dayjs
+      isWaitingGuidResponse: false
     }
   },
   methods: {
     newGuid() {
+      this.isWaitingGuidResponse = true;
+
       this.$api.id.newGuid().then(r => {
         this.guidHistory.unshift({
           guid: r.data.guid,
           datetime: new Date()
         })
+
+        this.isWaitingGuidResponse = false
       })
     }
   },
@@ -60,6 +67,11 @@ export default {
 
 .bun-button:focus
   background-image: none
+
+.bun-button .fa-icon
+  position: relative
+  bottom: -2px
+  margin-right: 0.4em
 
 .guid-history
   margin-top: 1em
