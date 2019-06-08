@@ -7,7 +7,6 @@
     <div class="pure-u-1-1">
       <button class="pure-button bun-button" @click="newGuid" v-bind:disabled="isWaitingGuidResponse">
         <v-icon name="circle-notch" spin v-show="isWaitingGuidResponse" />
-        <v-icon name="regular/circle" v-show="!isWaitingGuidResponse" />
         生成一个 GUID
         <small>（点击 GUID 可以复制）</small>
       </button>
