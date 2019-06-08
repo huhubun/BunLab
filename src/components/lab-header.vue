@@ -19,7 +19,7 @@ export default {
       let path = this.$route.path
       var route = routers.routes.find(r => r.path === path)
 
-      if(route){
+      if (route) {
         return route.title
       }
 
@@ -33,6 +33,10 @@ export default {
 header
   padding: 0.6em 3em
   background-color: rgb(238, 232, 213)
+
+@media (max-width: 768px)
+  header
+    padding: 0.6em 1em
 
 header .pure-menu-heading
   text-transform: none
