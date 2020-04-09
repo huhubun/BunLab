@@ -1,0 +1,27 @@
+﻿@page "/guidgen"
+
+<h1>GUIDGen</h1>
+
+<p class="lead">
+    GUID (Globally Unique Identifier 全局唯一标识符) 是微软对 DCE (Distributed Computing Environment) UUID (Universally Unique Identifier) 的一种实现。
+</p>
+
+<button type="button" class="btn btn-outline-dark" @onclick="Generate">
+    生成
+</button>
+
+<ul>
+    @foreach (var i in list)
+    {
+        <li>@i</li>
+    }
+</ul>
+
+@code {
+    private List<string> list = new List<string>();
+
+    private void Generate()
+    {
+        list.Insert(0, Guid.NewGuid().ToString());
+    }
+}
