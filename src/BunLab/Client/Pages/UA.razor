@@ -1,0 +1,44 @@
+﻿@page "/ua"
+
+@using BunLab.Client.Models.UA
+
+@inject IJSRuntime JSRuntime
+
+<h1>UA Viewer</h1>
+
+@foreach (var p in properties)
+{
+    <div>
+        <h2>@p.Name <a href="@p.Url" class="btn btn-outline-secondary btn-sm"> ? </a></h2>
+        <p>@p.Value</p>
+    </div>
+}
+
+@code {
+    private List<UAPageItem> properties = new List<UAPageItem>
+{
+        new UAPageItem("userAgent", "https://developer.mozilla.org/docs/Web/API/NavigatorID/userAgent"),
+        new UAPageItem("appCodeName", "https://developer.mozilla.org/docs/Web/API/NavigatorID/appCodeName"),
+        new UAPageItem("appName", "https://developer.mozilla.org/docs/Web/API/NavigatorID/appName"),
+        new UAPageItem("cookieEnabled", "https://developer.mozilla.org/docs/Web/API/Navigator/cookieEnabled"),
+        new UAPageItem("language", "https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/language"),
+    };
+
+    private async Task<string> GetNavigatorProperty(string propertyName)
+    {
+        return await JSRuntime.InvokeAsync<string>("getNavigatorProperty", propertyName);
+    }
+
+    private async Task Init()
+    {
+        foreach (var p in properties)
+        {
+            p.Value = await GetNavigatorProperty(p.Name);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Init();
+    }
+}
