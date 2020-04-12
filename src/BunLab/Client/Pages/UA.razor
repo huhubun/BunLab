@@ -4,15 +4,23 @@
 
 @inject IJSRuntime JSRuntime
 
-<h1>UA Viewer</h1>
+<div id="UAViewer">
 
-@foreach (var p in properties)
-{
-    <div>
-        <h2>@p.Name <a href="@p.Url" class="btn btn-outline-secondary btn-sm"> ? </a></h2>
-        <p>@p.Value</p>
-    </div>
-}
+    <h1 class="display-4">UA Viewer</h1>
+    <hr />
+
+
+    @foreach (var p in properties)
+    {
+        <div class="navigator-item">
+            <h1 class="font-weight-light">
+                <a href="@p.Url" class="text-dark" title="前往 MDN 了解更多">@p.Name <ion-icon name="open-outline"></ion-icon></a>
+            </h1>
+            <p>@p.Value</p>
+        </div>
+    }
+
+</div>
 
 @code {
     private List<UAPageItem> properties = new List<UAPageItem>
@@ -42,3 +50,9 @@
         await Init();
     }
 }
+
+<style>
+    #UAViewer .navigator-item ion-icon {
+        font-size: 16px;
+    }
+</style>
