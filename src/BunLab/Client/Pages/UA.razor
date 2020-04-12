@@ -1,7 +1,5 @@
 ﻿@page "/ua"
 
-@using BunLab.Client.Models.UA
-
 @inject IJSRuntime JSRuntime
 
 <div id="UAViewer">
@@ -9,27 +7,33 @@
     <h1 class="display-4">UA Viewer</h1>
     <hr />
 
-
-    @foreach (var p in properties)
-    {
-        <div class="navigator-item">
-            <h1 class="font-weight-light">
-                <a href="@p.Url" class="text-dark" title="前往 MDN 了解更多">@p.Name <ion-icon name="open-outline"></ion-icon></a>
-            </h1>
-            <p>@p.Value</p>
-        </div>
-    }
+    <LabList List="properties" />
 
 </div>
 
 @code {
-    private List<UAPageItem> properties = new List<UAPageItem>
-{
-        new UAPageItem("userAgent", "https://developer.mozilla.org/docs/Web/API/NavigatorID/userAgent"),
-        new UAPageItem("appCodeName", "https://developer.mozilla.org/docs/Web/API/NavigatorID/appCodeName"),
-        new UAPageItem("appName", "https://developer.mozilla.org/docs/Web/API/NavigatorID/appName"),
-        new UAPageItem("cookieEnabled", "https://developer.mozilla.org/docs/Web/API/Navigator/cookieEnabled"),
-        new UAPageItem("language", "https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/language"),
+    private List<LabListItem> properties = new List<LabListItem>
+    {
+        new LabListItem{
+            Name = "userAgent",
+            Url = "https://developer.mozilla.org/docs/Web/API/NavigatorID/userAgent"
+        },
+        new LabListItem{
+            Name = "appCodeName",
+            Url = "https://developer.mozilla.org/docs/Web/API/NavigatorID/appCodeName"
+        },
+        new LabListItem{
+            Name = "appName",
+            Url = "https://developer.mozilla.org/docs/Web/API/NavigatorID/appName"
+        },
+        new LabListItem{
+            Name = "cookieEnabled",
+            Url = "https://developer.mozilla.org/docs/Web/API/Navigator/cookieEnabled"
+        },
+        new LabListItem{
+            Name = "language",
+            Url = "https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/language"
+        }
     };
 
     private async Task<string> GetNavigatorProperty(string propertyName)
@@ -41,6 +45,7 @@
     {
         foreach (var p in properties)
         {
+            p.UrlTitle = "前往 MDN 了解更多";
             p.Value = await GetNavigatorProperty(p.Name);
         }
     }

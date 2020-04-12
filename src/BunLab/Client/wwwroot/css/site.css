@@ -183,3 +183,7 @@ app {
     display: inline-block;
     line-height: 1;
 }
+
+.text-monospace {
+    font-family: SFMono-Regular,"Segoe UI Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important
+}

@@ -1,0 +1,75 @@
+﻿@using BunLab.Shared.Common
+
+@if (HaveTitle)
+{
+    <h1>
+        @Title
+        <small style="font-size: 0.4em;" class="text-muted">@SmallTitle</small>
+    </h1>
+}
+
+@foreach (var item in List)
+{
+    <div class="navigator-item">
+
+        @CreateHeader(item)
+
+        <p>
+            @if (item.Value == null)
+            {
+                <em>(null)</em>
+            }
+            else if (item.Value == String.Empty)
+            {
+                <em>(empty)</em>
+            }
+            else
+            {
+                <span class="text-monospace">@item.Value</span>
+            }
+        </p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string SmallTitle { get; set; }
+
+    [Parameter]
+    public List<LabListItem> List { get; set; }
+
+    private bool HaveTitle => !String.IsNullOrEmpty(Title);
+
+    private RenderFragment CreateHeader(LabListItem item)
+    {
+        return __builder =>
+        {
+            if (HaveTitle)
+            {
+                <h2 class="font-weight-light">@CreateHeaderContent(item)</h2>
+            }
+            else
+            {
+                <h1 class="font-weight-light">@CreateHeaderContent(item)</h1>
+            }
+        };
+    }
+
+    private RenderFragment CreateHeaderContent(LabListItem item)
+    {
+        return __builder =>
+        {
+            @if (String.IsNullOrEmpty(item.Url))
+            {
+                @item.Name
+            }
+            else
+            {
+                <a href="@item.Url" class="text-dark" title="@item.UrlTitle">@item.Name <ion-icon name="open-outline"></ion-icon></a>
+            }
+        };
+    }
+}

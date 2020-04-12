@@ -1,0 +1,83 @@
+﻿@page "/about"
+
+@using System.Runtime.InteropServices
+@using System.Reflection
+@using BunLab.Shared.Models.Informations
+
+@inject HttpClient Http
+
+<div>
+
+    <h1 class="display-4">About</h1>
+    <p class="lead">
+        <a href="https://bun.plus" class="btn btn-sm btn-outline-dark">huhubun blog</a>
+        <a href="https://github.com/huhubun/BunLab" class="btn btn-sm btn-outline-dark">
+            <ion-icon name="logo-github"></ion-icon>
+            GitHub
+        </a>
+        <br />
+
+        <b>@clientAssemblyName.Name</b> <span class="text-monospace">v@(clientAssemblyName.Version)</span>
+        <br />
+
+        @if (serverInformation != null)
+        {
+            <b>@serverInformation.Name</b> <span class="text-monospace">v@(serverInformation.Version) (@serverInformation.RuntimeFramework @@ @(serverInformation.OS))</span>
+        }
+    </p>
+    <hr />
+
+    <LabList Title="Runtime Information" SmallTitle="Provides information about the .NET runtime installation" List="runtimeInformationList" />
+    <LabList Title="Runtime Environment" SmallTitle="Provides information about the common language runtime environment" List="runtimeEnvironmentList" />
+
+</div>
+
+@code {
+    private List<LabListItem> runtimeInformationList = new List<LabListItem>();
+    private List<LabListItem> runtimeEnvironmentList = new List<LabListItem>();
+    private AssemblyName clientAssemblyName = Assembly.GetExecutingAssembly().GetName();
+    private ServerInformationModel serverInformation = null;
+
+    private void GetRuntimeInformationList()
+    {
+        runtimeInformationList.AddRange(typeof(RuntimeInformation).GetProperties().Select(p => new LabListItem
+        {
+            Name = p.Name,
+            Value = p.GetValue(null)?.ToString()
+        })
+        .OrderBy(p => p.Name));
+    }
+
+    private void GetRuntimeEnvironmentList()
+    {
+        runtimeEnvironmentList.AddRange(typeof(RuntimeEnvironment).GetProperties().Select(p => new LabListItem
+        {
+            Name = p.Name,
+            Value = p.GetValue(null)?.ToString()
+        }));
+
+        runtimeEnvironmentList.AddRange(typeof(RuntimeEnvironment).GetMethods()
+            .Where(m => m.IsStatic)
+            .Where(m => !m.IsSpecialName)                   // 过滤掉属性
+            .Where(m => m.GetParameters().Length == 0)
+            .Select(p => new LabListItem
+            {
+                Name = p.Name.StartsWith("get", StringComparison.InvariantCultureIgnoreCase) ? p.Name.Remove(0, 3) : p.Name,
+                Value = p.Invoke(null, null)?.ToString()
+            }));
+
+        runtimeEnvironmentList = runtimeEnvironmentList.OrderBy(i => i.Name).ToList();
+    }
+
+    protected override void OnInitialized()
+    {
+        GetRuntimeInformationList();
+        GetRuntimeEnvironmentList();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        serverInformation = await Http.GetJsonAsync<ServerInformationModel>("api/informations");
+    }
+
+}
