@@ -7,28 +7,32 @@
 @inject HttpClient Http
 
 <div>
-
     <h1 class="display-4">About</h1>
     <p class="lead">
-        <a href="https://bun.plus" class="btn btn-sm btn-outline-dark">huhubun blog</a>
+        <a href="https://bun.plus" class="btn btn-sm btn-outline-dark">
+            huhubun blog
+        </a>
         <a href="https://github.com/huhubun/BunLab" class="btn btn-sm btn-outline-dark">
             <ion-icon name="logo-github"></ion-icon>
             GitHub
         </a>
-        <br />
+    </p>
+    <hr />
 
+    <p>
         <b>@clientAssemblyName.Name</b> <span class="text-monospace">v@(clientAssemblyName.Version)</span>
         <br />
 
         @if (serverInformation != null)
         {
-            <b>@serverInformation.Name</b> <span class="text-monospace">v@(serverInformation.Version) (@serverInformation.RuntimeFramework @@ @(serverInformation.OS))</span>
+        <b>@serverInformation.Name</b>  <span class="text-monospace">v@(serverInformation.Version) (@serverInformation.RuntimeFramework @@ @(serverInformation.OS))</span>
         }
     </p>
-    <hr />
 
-    <LabList Title="Runtime Information" SmallTitle="Provides information about the .NET runtime installation" List="runtimeInformationList" />
-    <LabList Title="Runtime Environment" SmallTitle="Provides information about the common language runtime environment" List="runtimeEnvironmentList" />
+    @{#if DEBUG}
+        <LabList Title="Runtime Information" SmallTitle="Provides information about the .NET runtime installation" List="runtimeInformationList" />
+        <LabList Title="Runtime Environment" SmallTitle="Provides information about the common language runtime environment" List="runtimeEnvironmentList" />
+    @{#endif}
 
 </div>
 
