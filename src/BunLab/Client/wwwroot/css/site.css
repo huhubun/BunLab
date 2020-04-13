@@ -187,3 +187,8 @@ app {
 .text-monospace {
     font-family: SFMono-Regular,"Segoe UI Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important
 }
+
+span.can-copied:hover {
+    cursor: pointer;
+    background-color: #f8f9fa; /* 和 bootstrap .bg-light 保持一致*/
+}

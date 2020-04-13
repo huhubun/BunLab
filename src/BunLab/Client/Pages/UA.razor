@@ -53,6 +53,7 @@
     protected override async Task OnInitializedAsync()
     {
         await Init();
+        await JSRuntime.InvokeVoidAsync("initClipboard");
     }
 }
 
