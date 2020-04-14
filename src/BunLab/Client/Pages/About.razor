@@ -9,29 +9,39 @@
 <div>
     <h1 class="display-4">About</h1>
     <p class="lead">
-        <a href="https://bun.plus" class="btn btn-sm btn-outline-dark">
-            huhubun blog
+        <a href="https://bun.plus" class="btn btn-sm btn-outline-primary">
+            <ion-icon name="heart-outline"></ion-icon> by huhubun
         </a>
         <a href="https://github.com/huhubun/BunLab" class="btn btn-sm btn-outline-dark">
-            <ion-icon name="logo-github"></ion-icon>
-            GitHub
+            <ion-icon name="logo-github"></ion-icon> GitHub
         </a>
+    </p>
+    <p>
+        <a href="https://lab.bun.plus" class="text-dark">Bun Lab</a> 由 <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor" class="text-dark">ASP.NET Core Blazor WebAssembly</a> 技术开发，旨在体验和尝试各种新技术~
     </p>
     <hr />
 
     <p>
-        <b>@clientAssemblyName.Name</b> <span class="text-monospace">v@(clientAssemblyName.Version)</span>
+        <b>@clientAssemblyName.Name</b>
+        <span class="text-monospace">@(clientAssemblyName.Version)</span>
         <br />
+
 
         @if (serverInformation != null)
         {
-        <b>@serverInformation.Name</b>  <span class="text-monospace">v@(serverInformation.Version) (@serverInformation.RuntimeFramework @@ @(serverInformation.OS))</span>
+            <b>@serverInformation.Name</b>
+            <span class="text-monospace">@(serverInformation.Version) (@serverInformation.RuntimeFramework @@ @(serverInformation.OS))</span>
+        }
+        else
+        {
+            <div class="spinner-grow text-dark" role="status"></div>
+            <span>Loading server-side information ...</span>
         }
     </p>
 
     @{#if DEBUG}
-        <LabList Title="Runtime Information" SmallTitle="Provides information about the .NET runtime installation" List="runtimeInformationList" />
-        <LabList Title="Runtime Environment" SmallTitle="Provides information about the common language runtime environment" List="runtimeEnvironmentList" />
+    <LabList Title="Runtime Information" SmallTitle="Provides information about the .NET runtime installation" List="runtimeInformationList" />
+    <LabList Title="Runtime Environment" SmallTitle="Provides information about the common language runtime environment" List="runtimeEnvironmentList" />
     @{#endif}
 
 </div>
