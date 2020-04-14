@@ -2,7 +2,7 @@
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
     <div class="col mb-4">
-        <div class="card h-100 text-center">
+        <div class="card h-100 text-center @(hoverCard == "ua" ? hoverClass : String.Empty)" @onmouseover="@(_ => OnHover("ua"))" @onmouseout="@(_ => OnHover(null))">
             <div class="card-body">
                 <h4 class="card-title">UA Viewer</h4>
                 <p class="card-text">通过浏览器的 navigator 查看 User Agent 等信息</p>
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="col mb-4">
-        <div class="card h-100 text-center">
+        <div class="card h-100 text-center @(hoverCard == "guidgen" ? hoverClass : String.Empty)" @onmouseover="@(_ => OnHover("guidgen"))" @onmouseout="@(_ => OnHover(null))">
             <div class="card-body">
                 <h4 class="card-title">GUID Gen</h4>
                 <p class="card-text">GUID(UUID) 全局唯一标识符生成器</p>
@@ -24,3 +24,13 @@
         </div>
     </div>
 </div>
+
+@code {
+    private string hoverClass = "shadow";
+    private string hoverCard = null;
+
+    private void OnHover(string cardName)
+    {
+        hoverCard = cardName;
+    }
+}
