@@ -1,5 +1,7 @@
 ﻿@page "/guidgen"
 
+@using System.Timers
+
 @inject IJSRuntime JSRuntime
 
 <h1 class="display-4">GUIDGen</h1>
@@ -44,6 +46,8 @@
 </div>
 
 @code {
+    private Timer timer;
+
     private List<string> guidList = new List<string>();
     private string selectedGuid = null;
 
@@ -55,10 +59,24 @@
     private void OnGuidSelected(string guid)
     {
         selectedGuid = guid;
+
+        timer.Stop();
+        timer.Start();
     }
 
     protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("initClipboard");
+    }
+
+    protected override void OnInitialized()
+    {
+        timer = new Timer(1000);
+        timer.Elapsed += (sender, e) =>
+        {
+            selectedGuid = null;
+            StateHasChanged();
+        };
+        timer.AutoReset = false;
     }
 }
