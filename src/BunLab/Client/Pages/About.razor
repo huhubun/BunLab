@@ -91,7 +91,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        serverInformation = await Http.GetJsonAsync<ServerInformationModel>("api/informations");
+        serverInformation = await Http.GetFromJsonAsync<ServerInformationModel>("api/informations");
     }
 
 }
