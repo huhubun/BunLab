@@ -21,7 +21,7 @@ namespace BunLab.Client.Core.Colors
         {
             var alphaString = GetCssColorAlpha(color).ToString();
 
-            return $"hsla({color.GetHue()},{color.GetSaturation():P0},{color.GetBrightness():P0},{alphaString})";
+            return $"hsla({color.GetHue():N0},{color.GetSaturation():P0},{color.GetBrightness():P0},{alphaString})";
         }
 
         public static double GetCssColorAlpha(this Color color)
