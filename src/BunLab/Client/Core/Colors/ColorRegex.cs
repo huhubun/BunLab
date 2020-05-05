@@ -57,7 +57,7 @@ namespace BunLab.Client.Core.Colors
         {
             get
             {
-                const string RGBA_REGEX_STR = @"^rgba\((\d{1,3}),(\d{1,3}),(\d{1,3}),(0{0,1}(.\d){0,}|1)\)$";
+                const string RGBA_REGEX_STR = @"^rgba\((\d{1,3}),(\d{1,3}),(\d{1,3}),((0{0,1}(.\d+))|0|1)\)$";
                 return new ColorRegex(ColorDefineType.RGBA, new Regex(RGBA_REGEX_STR));
             }
         }
