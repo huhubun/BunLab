@@ -1,4 +1,4 @@
-﻿namespace BunLab.Shared.Common
+﻿namespace Bun.Lab.Client.Models.LabLists
 {
     public class LabListItem
     {
