@@ -23,17 +23,6 @@
             </div>
         </div>
     </div>
-    <div class="col mb-4">
-        <div class="card h-100 text-center @(hoverCard == "color" ? hoverClass : String.Empty)" @onmouseover="@(_ => OnHover("color"))" @onmouseout="@(_ => OnHover(null))">
-            <div class="card-body">
-                <h4 class="card-title">Color Info</h4>
-                <p class="card-text">查看颜色的RGB、HSL信息，或是对16进制、rgb()函数形式写法的颜色进行转换</p>
-            </div>
-            <div class="card-footer bg-primary">
-                <a href="./color" class="text-white text-decoration-none stretched-link">立即生成</a>
-            </div>
-        </div>
-    </div>
 </div>
 
 @code {

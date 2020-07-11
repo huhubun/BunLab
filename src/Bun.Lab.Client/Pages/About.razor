@@ -2,7 +2,7 @@
 
 @using System.Runtime.InteropServices
 @using System.Reflection
-@using BunLab.Shared.Models.Informations
+@using Bun.Lab.Client.Models.LabLists
 
 @inject HttpClient Http
 
@@ -24,19 +24,6 @@
     <p>
         <b>@clientAssemblyName.Name</b>
         <span class="text-monospace">@(clientAssemblyName.Version)</span>
-        <br />
-
-
-        @if (serverInformation != null)
-        {
-            <b>@serverInformation.Name</b>
-            <span class="text-monospace">@(serverInformation.Version) (@serverInformation.RuntimeFramework @@ @(serverInformation.OS))</span>
-        }
-        else
-        {
-            <div class="spinner-grow text-dark" role="status"></div>
-            <span>Loading server-side information ...</span>
-        }
     </p>
 
     @{#if DEBUG}
@@ -50,7 +37,6 @@
     private List<LabListItem> runtimeInformationList = new List<LabListItem>();
     private List<LabListItem> runtimeEnvironmentList = new List<LabListItem>();
     private AssemblyName clientAssemblyName = Assembly.GetExecutingAssembly().GetName();
-    private ServerInformationModel serverInformation = null;
 
     private void GetRuntimeInformationList()
     {
@@ -88,10 +74,4 @@
         GetRuntimeInformationList();
         GetRuntimeEnvironmentList();
     }
-
-    protected override async Task OnInitializedAsync()
-    {
-        serverInformation = await Http.GetFromJsonAsync<ServerInformationModel>("api/informations");
-    }
-
 }

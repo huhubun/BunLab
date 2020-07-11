@@ -1,5 +1,7 @@
 ﻿@page "/ua"
 
+@using Bun.Lab.Client.Models.LabLists
+
 @inject IJSRuntime JSRuntime
 
 <div id="UAViewer">
@@ -13,7 +15,7 @@
 
 @code {
     private List<LabListItem> properties = new List<LabListItem>
-    {
+{
         new LabListItem{
             Name = "userAgent",
             Url = "https://developer.mozilla.org/docs/Web/API/NavigatorID/userAgent"
